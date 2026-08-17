@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#121212">
+    
+    <title>Villaser Gestión</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- CABECERA PRINCIPAL -->
+    <header class="gnc-card" id="mainHeader">
+        <p class="gnc-label">Plataforma Oficial</p>
+        <h1 class="gnc-title">Villaser Gestión</h1>
+        <div class="gnc-status">
+            <span class="status-dot"></span>
+            <span class="status-text">Sistema Activo</span>
+        </div>
+    </header>
+
+    <!-- PANTALLA DE INICIO / ACCESO -->
+    <main id="accessScreen" class="glass-container">
+        <h2>Bienvenido</h2>
+        <button id="enterBtn" class="primary-action-btn" onclick="iniciarAcceso()">Ingresar a Calculadora</button>
+    </main>
+
+    <!-- PANTALLA DE BIENVENIDA (ANIMACIÓN) -->
+    <section id="welcomeScreen" class="hidden">
+        <h2 class="welcome-text">¡BIENVENIDO!</h2>
+    </section>
+
+    <!-- INTERFAZ PRINCIPAL DE LA APP -->
+    <section id="appScreen" class="hidden">
+        <!-- Botón Desplegable del Menú -->
+        <button id="menuToggleBtn" class="glass-btn primary-btn" onclick="toggleMenu()">MENÚ PRINCIPAL</button>
+
+        <!-- Cuadrícula de Botones de Módulos -->
+        <nav id="menuGrid" class="grid-container hidden">
+            <button class="grid-btn" id="btnPresupuesto">Presupuesto</button>
+            <button class="grid-btn" id="btnMateriales">Materiales</button>
+            <button class="grid-btn" id="btnVerClientes">Ver Clientes</button>
+            <button class="grid-btn" id="btnNuevoCliente">Nuevo Cliente</button>
+            <button class="grid-btn" id="btnCatalogos">Catálogos</button>
+            <button class="grid-btn" id="btnCompartirWts">Compartir WTS</button>
+            <button class="grid-btn" id="btnCostos">Costos - Mano de obra</button>
+            <button class="grid-btn" id="btnNuevoModulo">Nuevo Módulo</button>
+        </nav>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
