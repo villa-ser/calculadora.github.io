@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#121212">
+    
+    <title>Coordinación de Protecciones - Villaser Gestión</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="gnc-card">
+        <!-- BOTÓN VOLVER -->
+        <button class="back-btn" onclick="volverAlMenu()">← VOLVER AL MENÚ</button>
+
+        <h1 class="gnc-title">Inecuaciones</h1>
+        <p class="gnc-subtitle">Coordinación de Protecciones (AEA 90364)</p>
+
+        <!-- TARJETAS DE VERIFICACIÓN (INECUACIONES) -->
+        <div class="results-top">
+            <div id="cond1" class="condition-card fail">
+                <span class="formula">I<sub>B</sub> ≤ I<sub>n</sub> ≤ I<sub>z</sub></span>
+                <span class="status-icon" id="status1">✖</span>
+            </div>
+            <div id="cond2" class="condition-card fail">
+                <span class="formula">I<sub>2</sub> ≤ 1,45 × I<sub>z</sub></span>
+                <span class="status-icon" id="status2">✖</span>
+            </div>
+            <div id="cond3" class="condition-card fail">
+                <span class="formula">I''<sub>k</sub> ≤ P<sub>dC</sub></span>
+                <span class="status-icon" id="status3">✖</span>
+            </div>
+        </div>
+
+        <!-- SELECTOR DE FASE -->
+        <div class="phase-toggle">
+            <button id="btn-mono" class="phase-btn active" onclick="setPhase('mono')">Monofásico (2x)</button>
+            <button id="btn-tri" class="phase-btn" onclick="setPhase('tri')">Trifásico (3x)</button>
+        </div>
+
+        <!-- ASISTENTE DE POTENCIA -->
+        <div id="ib-helper" class="power-calc">
+            <div class="helper-box">
+                <label>POTENCIA (W)</label>
+                <input type="text" id="w-val" class="p-input" placeholder="W" readonly onclick="setActive('w')">
+            </div>
+            <div class="helper-box">
+                <label>TENSIÓN (V)</label>
+                <input type="text" id="v-val" class="p-input" value="220" readonly onclick="setActive('v')">
+            </div>
+        </div>
+
+        <!-- PRIMERA FILA DE ENTRADAS -->
+        <div class="input-row">
+            <div id="group-ib" class="input-group active" onclick="setActive('ib')">
+                <label>I<sub>B</sub></label>
+                <span class="desc">Carga Máx</span>
+                <div id="disp-ib" class="display-value">0</div>
+            </div>
+            <div id="group-in" class="input-group">
+                <label>I<sub>n</sub></label>
+                <span class="desc">Calibre TM</span>
+                <div class="custom-select">
+                    <div class="select-selected" id="display-in" onclick="toggleDropdown('list-in', 'display-in')">--</div>
+                    <div class="select-items" id="list-in">
+                        <div class="opt-item" onclick="selectOptionIn(0, '--')">--</div>
+                        <div class="opt-item" onclick="selectOptionIn(6, '6A')">6A</div>
+                        <div class="opt-item" onclick="selectOptionIn(10, '10A')">10A</div>
+                        <div class="opt-item" onclick="selectOptionIn(16, '16A')">16A</div>
+                        <div class="opt-item" onclick="selectOptionIn(20, '20A')">20A</div>
+                        <div class="opt-item" onclick="selectOptionIn(25, '25A')">25A</div>
+                        <div class="opt-item" onclick="selectOptionIn(32, '32A')">32A</div>
+                        <div class="opt-item" onclick="selectOptionIn(40, '40A')">40A</div>
+                        <div class="opt-item" onclick="selectOptionIn(50, '50A')">50A</div>
+                        <div class="opt-item" onclick="selectOptionIn(63, '63A')">63A</div>
+                        <div class="opt-item" onclick="selectOptionIn(80, '80A')">80A</div>
+                        <div class="opt-item" onclick="selectOptionIn(100, '100A')">100A</div>
+                    </div>
+                </div>
+            </div>
+            <div id="group-iz" class="input-group">
+                <label>I<sub>z</sub></label>
+                <span class="desc">Sección mm²</span>
+                <div class="custom-select">
+                    <div class="select-selected" id="display-iz" onclick="toggleDropdown('list-iz', 'display-iz')">--</div>
+                    <div class="select-items" id="list-iz"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEGUNDA FILA DE ENTRADAS -->
+        <div class="input-row">
+            <div id="group-i2" class="input-group">
+                <label>I<sub>2</sub></label>
+                <span class="desc">1.45 × I<sub>n</sub></span>
+                <div id="disp-i2" class="display-value highlight-amber">0</div>
+            </div>
+            <div id="group-ik" class="input-group" onclick="setActive('ik')">
+                <label>I''<sub>k</sub></label>
+                <span class="desc">Cortocircuito</span>
+                <div id="disp-ik" class="display-value">0</div>
+            </div>
+            <div id="group-pdc" class="input-group" onclick="setActive('pdc')">
+                <label>P<sub>dC</sub></label>
+                <span class="desc">Poder Corte</span>
+                <div id="disp-pdc" class="display-value">0</div>
+            </div>
+        </div>
+
+        <!-- TECLADO NUMÉRICO INTEGRADO -->
+        <div class="numpad">
+            <button class="num-btn" onclick="press(7)">7</button>
+            <button class="num-btn" onclick="press(8)">8</button>
+            <button class="num-btn" onclick="press(9)">9</button>
+            <button class="num-btn" onclick="press(4)">4</button>
+            <button class="num-btn" onclick="press(5)">5</button>
+            <button class="num-btn" onclick="press(6)">6</button>
+            <button class="num-btn" onclick="press(1)">1</button>
+            <button class="num-btn" onclick="press(2)">2</button>
+            <button class="num-btn" onclick="press(3)">3</button>
+            <button class="num-btn action" onclick="press('.')">.</button>
+            <button class="num-btn" onclick="press(0)">0</button>
+            <button class="num-btn action" onclick="clearVal()">DEL</button>
+            <button class="num-btn reset-btn" onclick="resetAll()">REINICIAR TODO</button>
+        </div>
+
+        <!-- PIE INFORMATIVO NORMATIVO -->
+        <footer class="info-footer">
+            <b>Referencia Normativa:</b><br>
+            AEA 90364-4-43. Valores de I<sub>z</sub> para conductores de Cu/PVC en cañería empotrada (Método B1). I<sub>2</sub> = 1,45 × I<sub>n</sub> (IEC 60898).
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
