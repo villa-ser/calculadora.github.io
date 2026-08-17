@@ -19,9 +19,8 @@ function iniciarAcceso() {
         welcomeText.classList.remove('animate-welcome');
         appScreen.classList.remove('hidden');
         
-        // OPCIONAL: Si quieres que los botones se muestren inmediatamente 
-        // sin tener que presionar "MENÚ PRINCIPAL", descomenta la siguiente línea:
-        // document.getElementById('menuGrid').classList.remove('hidden');
+        // Muestra la grilla de botones automáticamente al terminar la animación
+        document.getElementById('menuGrid').classList.remove('hidden');
     }, 2500);
 }
 
@@ -30,21 +29,35 @@ function toggleMenu() {
     grid.classList.toggle('hidden');
 }
 
-// Navegación de botones
+// Lógica de carga y navegación
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- NUEVO: Verificar si regresamos con el botón "Volver" ---
+    if (window.location.hash === '#menu') {
+        // Ocultar pantalla de acceso
+        document.getElementById('accessScreen').classList.add('hidden');
+        document.getElementById('mainHeader').classList.add('hidden');
+        
+        // Mostrar la app y la grilla de botones directamente (sin animación)
+        document.getElementById('appScreen').classList.remove('hidden');
+        document.getElementById('menuGrid').classList.remove('hidden');
+    }
+    // -------------------------------------------------------------
+
+    // Rutas de los módulos
     const rutas = {
         'btnInecuaciones': './inecuaciones/index.html',
         'btnCaidadeTension': './caida_de_tension/index.html',
-        'btnIntensidadadmisible': './intensidad_admisible/index.html', // Corregido: antes era un punto en lugar de ./
+        'btnIntensidadadmisible': './intensidad_admisible/index.html',
         'btnPotenciaMotoresCapacitores': './potencia_motores_apacitores/index.html',
-        'btnVerificacionCortocircuito': './verificacion_intensidad_de_cortocircuito/index.html', // ID corregido
-        'btnBalancetermicoenTableros': './balance_termico_en_tableros/index.html', // Coma agregada
-        'btnCurvatermica': './curva_termica/index.html', // Coma agregada
-        'btnBancodeCapacitores': './banco_de_capacitores/index.html', // Coma agregada
-        'btnDiagnosticodeCapacitores': './diagnostico_de_capacitores/index.html', // Coma agregada
-        'btnCorrientedeCCMinima': './corriente_de_cc_minima/index.html', // Coma agregada
-        'btnReducciondeCCmaxima': './reduccion_de_cc_maxima/index.html', // Coma agregada
-        'btnMaximaCantidadCables': './maxima_cantida_de_cables_en_caneria/index.html', // ID corregido y coma agregada
+        'btnVerificacionCortocircuito': './verificacion_intensidad_de_cortocircuito/index.html', 
+        'btnBalancetermicoenTableros': './balance_termico_en_tableros/index.html', 
+        'btnCurvatermica': './curva_termica/index.html', 
+        'btnBancodeCapacitores': './banco_de_capacitores/index.html', 
+        'btnDiagnosticodeCapacitores': './diagnostico_de_capacitores/index.html', 
+        'btnCorrientedeCCMinima': './corriente_de_cc_minima/index.html', 
+        'btnReducciondeCCmaxima': './reduccion_de_cc_maxima/index.html', 
+        'btnMaximaCantidadCables': './maxima_cantida_de_cables_en_caneria/index.html', 
         'btnNuevoModulo': './nuevo_modulo/index.html'
     };
 
