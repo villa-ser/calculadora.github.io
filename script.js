@@ -18,6 +18,10 @@ function iniciarAcceso() {
         welcomeScreen.classList.add('hidden');
         welcomeText.classList.remove('animate-welcome');
         appScreen.classList.remove('hidden');
+        
+        // OPCIONAL: Si quieres que los botones se muestren inmediatamente 
+        // sin tener que presionar "MENÚ PRINCIPAL", descomenta la siguiente línea:
+        // document.getElementById('menuGrid').classList.remove('hidden');
     }, 2500);
 }
 
@@ -29,18 +33,18 @@ function toggleMenu() {
 // Navegación de botones
 document.addEventListener('DOMContentLoaded', () => {
     const rutas = {
-        'btnInecuaciones': './inecuaciones/index.html', // <-- Redirige a la subcarpeta inecuaciones
+        'btnInecuaciones': './inecuaciones/index.html',
         'btnCaidadeTension': './caida_de_tension/index.html',
-        'btnIntensidadadmisible': '.intensidad_admisible/index.html',
+        'btnIntensidadadmisible': './intensidad_admisible/index.html', // Corregido: antes era un punto en lugar de ./
         'btnPotenciaMotoresCapacitores': './potencia_motores_apacitores/index.html',
-        'btnVerificacion Intensidad de Cortocircuito': './verificacion_intensidad_de_cortocircuito/index.html',
-        'btnBalancetermicoenTableros': './balance_termico_en_tableros/index.html'
-        'btnCurvatermica': './curva_termica/index.html'
-        'btnBancodeCapacitores': './banco_de_capacitores/index.html'
-        'btnDiagnosticodeCapacitores': './diagnostico_de_capacitores/index.html'
-        'btnCorrientedeCCMínima': './corriente_de_cc_minima/index.html'
-        'btnReducciondeCCmáxima': './reduccion_de_cc_maxima/index.html'
-        'btnMáximacantidadecablesencañería': './máxima_cantida_de_cables_en_cañeria/index.html'
+        'btnVerificacionCortocircuito': './verificacion_intensidad_de_cortocircuito/index.html', // ID corregido
+        'btnBalancetermicoenTableros': './balance_termico_en_tableros/index.html', // Coma agregada
+        'btnCurvatermica': './curva_termica/index.html', // Coma agregada
+        'btnBancodeCapacitores': './banco_de_capacitores/index.html', // Coma agregada
+        'btnDiagnosticodeCapacitores': './diagnostico_de_capacitores/index.html', // Coma agregada
+        'btnCorrientedeCCMinima': './corriente_de_cc_minima/index.html', // Coma agregada
+        'btnReducciondeCCmaxima': './reduccion_de_cc_maxima/index.html', // Coma agregada
+        'btnMaximaCantidadCables': './maxima_cantida_de_cables_en_caneria/index.html', // ID corregido y coma agregada
         'btnNuevoModulo': './nuevo_modulo/index.html'
     };
 
