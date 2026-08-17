@@ -30,11 +30,18 @@ function toggleMenu() {
 document.addEventListener('DOMContentLoaded', () => {
     const rutas = {
         'btnInecuaciones': './inecuaciones/index.html', // <-- Redirige a la subcarpeta inecuaciones
-        'btnMateriales': './materiales/index.html',
-        'btnVerClientes': './ver_clientes/index.html',
-        'btnNuevoCliente': './nuevo_cliente/index.html',
-        'btnCatalogos': './catalogos/index.html',
-        'btnCostos': './costos/index.html'
+        'btnCaidadeTension': './caida_de_tension/index.html',
+        'btnIntensidadadmisible': '.intensidad_admisible/index.html',
+        'btnPotenciaMotoresCapacitores': './potencia_motores_apacitores/index.html',
+        'btnVerificacion Intensidad de Cortocircuito': './verificacion_intensidad_de_cortocircuito/index.html',
+        'btnBalancetermicoenTableros': './balance_termico_en_tableros/index.html'
+        'btnCurvatermica': './curva_termica/index.html'
+        'btnBancodeCapacitores': './banco_de_capacitores/index.html'
+        'btnDiagnosticodeCapacitores': './diagnostico_de_capacitores/index.html'
+        'btnCorrientedeCCMínima': './corriente_de_cc_minima/index.html'
+        'btnReducciondeCCmáxima': './reduccion_de_cc_maxima/index.html'
+        'btnMáximacantidadecablesencañería': './máxima_cantida_de_cables_en_cañeria/index.html'
+        'btnNuevoModulo': './nuevo_modulo/index.html'
     };
 
     Object.keys(rutas).forEach(id => {
