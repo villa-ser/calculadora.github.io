@@ -29,7 +29,7 @@ function toggleMenu() {
 // Navegación de botones
 document.addEventListener('DOMContentLoaded', () => {
     const rutas = {
-        'btnPresupuesto': './presupuesto/index.html',
+        'btnInecuaciones': './inecuaciones/index.html', // <-- Redirige a la subcarpeta inecuaciones
         'btnMateriales': './materiales/index.html',
         'btnVerClientes': './ver_clientes/index.html',
         'btnNuevoCliente': './nuevo_cliente/index.html',
