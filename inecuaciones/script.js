@@ -26,8 +26,10 @@ function init() {
 }
 
 function volverAlMenu() {
-    window.location.href = '../index.html';
+    // Al agregar #menu le damos una señal a la página principal
+    window.location.href = '../index.html#menu';
 }
+
 
 // Menú desplegable personalizado
 function toggleDropdown(listId, displayId) {
