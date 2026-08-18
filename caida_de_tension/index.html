@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#121212">
+    
+    <title>Caída de Tensión - Villaser Gestión</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- MODAL DE ALERTA DE ARRANQUE -->
+    <div id="modal" class="modal-overlay">
+        <div class="modal-box">
+            <p>⚠️ <b>RECORDATORIO:</b><br><br>En el arranque de motores la intensidad (Amp) sube entre <b>5 y 8 veces</b>.<br><br>Asegúrese de ingresar el valor de corriente de arranque para un cálculo correcto.</p>
+            <button class="modal-btn" onclick="closeModal()">ACEPTAR</button>
+        </div>
+    </div>
+
+    <div class="gnc-card">
+        <!-- BOTÓN VOLVER -->
+        <button class="back-btn" onclick="volverAlMenu()">← VOLVER AL MENÚ</button>
+
+        <h1 class="gnc-title">Caída de Tensión</h1>
+        <p class="gnc-subtitle">Cálculo de caída ΔU (AEA 90364-5-52)</p>
+
+        <!-- TARJETAS DE RESULTADO SUPERIORES -->
+        <div class="results-top">
+            <div class="res-item">
+                <span class="res-label">Caída (V)</span>
+                <span class="res-val" id="out_u">0.00 V</span>
+            </div>
+            <div class="res-item">
+                <span class="res-label">Caída (%)</span>
+                <span class="res-val pct-drop" id="out_pct">0.00 %</span>
+            </div>
+            <div class="res-item">
+                <span class="res-label">Llegada</span>
+                <span class="res-val v-final" id="out_fin">0.00 V</span>
+            </div>
+        </div>
+
+        <!-- BOTONES SELECTORES DE SISTEMA Y MATERIAL -->
+        <div class="option-row">
+            <div class="btn-group">
+                <label><input type="radio" name="sis" value="2" checked onchange="calc()"><span>Mono</span></label>
+                <label><input type="radio" name="sis" value="1.732" onchange="calc()"><span>Trif</span></label>
+            </div>
+            <div class="btn-group">
+                <label><input type="radio" name="mat" value="cu" checked onchange="updateTable()"><span>CU</span></label>
+                <label><input type="radio" name="mat" value="al" onchange="updateTable()"><span>AL</span></label>
+            </div>
+        </div>
+
+        <!-- SELECTOR DE TIPO DE CARGA -->
+        <div class="option-row">
+            <div class="btn-group" style="grid-column: span 2;">
+                <label><input type="radio" name="preset" value="normal" checked onclick="setPreset(0.85, 0.53)"><span>Carga Normal</span></label>
+                <label><input type="radio" name="preset" value="motor" onclick="setPreset(0.30, 0.95)"><span>Arranque Motor</span></label>
+            </div>
+        </div>
+
+        <!-- PRIMERA FILA DE ENTRADAS -->
+        <div class="input-row">
+            <div class="input-group active" id="grp-amp" onclick="setActive('amp')">
+                <label>Amp (I)</label>
+                <div id="disp-amp" class="display-value">0</div>
+            </div>
+            <div class="input-group" id="grp-mts" onclick="setActive('mts')">
+                <label>Metros (L)</label>
+                <div id="disp-mts" class="display-value">0</div>
+            </div>
+            <div class="input-group">
+                <label>Sección mm²</label>
+                <div class="custom-select">
+                    <div class="select-selected" id="disp-sec-sel" onclick="toggleDrop(event)">2.5</div>
+                    <div class="select-items" id="sec-options">
+                        <div class="opt-item" onclick="setSec('1.0')">1.0</div>
+                        <div class="opt-item" onclick="setSec('1.5')">1.5</div>
+                        <div class="opt-item" onclick="setSec('2.5')">2.5</div>
+                        <div class="opt-item" onclick="setSec('4')">4</div>
+                        <div class="opt-item" onclick="setSec('6')">6</div>
+                        <div class="opt-item" onclick="setSec('10')">10</div>
+                        <div class="opt-item" onclick="setSec('16')">16</div>
+                        <div class="opt-item" onclick="setSec('25')">25</div>
+                        <div class="opt-item" onclick="setSec('35')">35</div>
+                        <div class="opt-item" onclick="setSec('50')">50</div>
+                    </div>
+                </div>
+                <input type="hidden" id="sec-val" value="2.5">
+            </div>
+        </div>
+
+        <!-- SEGUNDA FILA DE ENTRADAS -->
+        <div class="input-row">
+            <div class="input-group" id="grp-vnom" onclick="setActive('vnom')">
+                <label>V. Nom</label>
+                <div id="disp-vnom" class="display-value">220</div>
+            </div>
+            <div class="input-group" id="grp-phi">
+                <label>cos φ | sen φ</label>
+                <div class="display-value display-small">
+                    <span id="disp-cosphi" onclick="setActive('cosphi')">0.85</span> | 
+                    <span id="disp-senphi" onclick="setActive('senphi')">0.53</span>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>R | X (Ω/km)</label>
+                <div class="display-value display-small" style="color: var(--primary-neon);">
+                    <span id="disp-res">7.98</span> | <span id="disp-reac">0.08</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TECLADO NUMÉRICO INTEGRADO -->
+        <div class="numpad">
+            <button class="num-btn" onclick="press(7)">7</button>
+            <button class="num-btn" onclick="press(8)">8</button>
+            <button class="num-btn" onclick="press(9)">9</button>
+            <button class="num-btn" onclick="press(4)">4</button>
+            <button class="num-btn" onclick="press(5)">5</button>
+            <button class="num-btn" onclick="press(6)">6</button>
+            <button class="num-btn" onclick="press(1)">1</button>
+            <button class="num-btn" onclick="press(2)">2</button>
+            <button class="num-btn" onclick="press(3)">3</button>
+            <button class="num-btn action" onclick="press('.')">.</button>
+            <button class="num-btn" onclick="press(0)">0</button>
+            <button class="num-btn action" onclick="clearVal()">DEL</button>
+            <button class="num-btn reset-btn" onclick="resetAll()">REINICIAR TODO</button>
+        </div>
+
+        <!-- PIE INFORMATIVO NORMATIVO -->
+        <footer class="info-footer">
+            <b>Reseña Técnica:</b><br>
+            Cálculo basado en <b>AEA 90364-5-52</b>. Fórmula:
+            <div class="formula-box">ΔU = k · I · L · (R · cos φ + X · sen φ)</div>
+            Donde <b>k</b> es 2 (Mono) o √3 (Trif); <b>L</b> en km y <b>X</b> = 0.08 Ω/km.
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+          </html>
+
