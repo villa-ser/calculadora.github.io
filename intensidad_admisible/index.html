@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#121212">
+    
+    <title>Intensidad Admisible Iz - Villaser Gestión</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="gnc-card">
+        <!-- BOTÓN VOLVER -->
+        <button class="back-btn" onclick="volverAlMenu()">← VOLVER AL MENÚ</button>
+
+        <h1 class="gnc-title" id="main-title">TABLA 770.12.I</h1>
+        <p class="gnc-subtitle">Intensidad Admisible Iz (AEA)</p>
+
+        <!-- TIPO DE CONDUCTOR -->
+        <div class="selector-row-full">
+            <div class="input-group">
+                <label>CONDUCTOR / PROTECCIÓN</label>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" id="btn-T1" onclick="setTable('770.12.I')">Sin Env. (247-3)</button>
+                    <button class="toggle-btn" id="btn-T3" onclick="setTable('770.12.III')">Con Env. (2178-1)</button>
+                </div>
+                <input type="hidden" id="table-val" value="770.12.I">
+            </div>
+        </div>
+
+        <!-- MÉTODO DE INSTALACIÓN -->
+        <div class="selector-row-full">
+            <div class="input-group">
+                <label>MÉTODO DE INSTALACIÓN</label>
+                <div class="toggle-group" id="methods-container">
+                    <!-- Botones generados por JS -->
+                </div>
+                <input type="hidden" id="method-val" value="B1">
+            </div>
+        </div>
+
+        <!-- SECCIÓN Y TIPO DE CIRCUITO -->
+        <div class="selector-row">
+            <div class="input-group">
+                <label>SECCIÓN</label>
+                <div class="custom-select">
+                    <div class="select-selected" id="cable-display" onclick="toggleDrop(event)">2.5 mm²</div>
+                    <div class="select-items" id="cable-options"></div>
+                </div>
+                <input type="hidden" id="mm-val" value="2.5">
+            </div>
+
+            <div class="input-group">
+                <label>CIRCUITO</label>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" id="btn-2x" onclick="setType('2x')">2x</button>
+                    <button class="toggle-btn" id="btn-3x" onclick="setType('3x')">3x</button>
+                </div>
+                <input type="hidden" id="type-val" value="2x">
+            </div>
+        </div>
+
+        <!-- RESULTADO PRINCIPAL -->
+        <div class="display-result">
+            <span class="iz-label">Corriente Admisible (Iz)</span>
+            <div class="iz-value" id="res-val">21<span class="unit">A</span></div>
+        </div>
+
+        <!-- TABLA COMPLETA -->
+        <div class="table-title" id="table-title-display">Mostrando valores para Método B1</div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>MM²</th><th>2X</th><th>3X</th>
+                        <th>MM²</th><th>2X</th><th>3X</th>
+                    </tr>
+                </thead>
+                <tbody id="data-table"></tbody>
+            </table>
+        </div>
+
+        <!-- DESCRIPCIÓN DEL MÉTODO (GRÁFICO Y TEXTO) -->
+        <div class="method-desc" id="method-desc-display">
+            <div id="method-image"></div>
+            <div id="method-text"></div>
+        </div>
+
+        <!-- PIE INFORMATIVO NORMATIVO -->
+        <footer class="info-footer" id="footer-text">
+            <b>Referencia:</b> Tabla 770.12.I. Intensidades admisibles [A] para temperatura ambiente de 40 °C. Cables sin envoltura en cañerías o cablecanales.
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
