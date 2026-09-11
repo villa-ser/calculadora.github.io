@@ -26,10 +26,8 @@ function init() {
 }
 
 function volverAlMenu() {
-    // Al agregar #menu le damos una señal a la página principal
     window.location.href = '../index.html#menu';
 }
-
 
 // Menú desplegable personalizado
 function toggleDropdown(listId, displayId) {
@@ -64,11 +62,15 @@ function selectOptionIz(val, text) {
     updateIz(val);
 }
 
-// Lógica de fases y datos
+// Lógica de fases y cambio automático de tensión
 function setPhase(p) {
     currentPhase = p;
     document.getElementById('btn-mono').classList.toggle('active', p === 'mono');
     document.getElementById('btn-tri').classList.toggle('active', p === 'tri');
+    
+    // Asignación automática de tensión según fase
+    data.v = p === 'tri' ? '380' : '220';
+    document.getElementById('v-val').value = data.v;
     
     const listIz = document.getElementById('list-iz');
     listIz.innerHTML = '<div class="opt-item" onclick="selectOptionIz(0, \'--\')">--</div>';
@@ -78,6 +80,8 @@ function setPhase(p) {
     
     data.iz = 0;
     document.getElementById('display-iz').innerText = '--';
+    
+    calcIB(); // Recalcula la corriente con la nueva tensión
     calculate();
 }
 
@@ -109,15 +113,21 @@ function setActive(field) {
     }
 }
 
+// Cálculo de IB adaptado a normativa
 function calcIB() {
     const w = parseFloat(data.w) || 0;
-    const v = parseFloat(data.v) || 220;
+    const v = parseFloat(data.v) || (currentPhase === 'tri' ? 380 : 220);
+    
     if (w > 0) {
-        let res = (w / v).toFixed(2);
-        data.ib = res.toString();
+        // En trifásica divide por (V * 1.732), en monofásica divide por V
+        let res = currentPhase === 'tri' ? (w / (v * 1.732)) : (w / v);
+        data.ib = res.toFixed(2).toString();
         document.getElementById('disp-ib').innerText = data.ib;
-        calculate();
+    } else {
+        data.ib = '';
+        document.getElementById('disp-ib').innerText = '0';
     }
+    calculate();
 }
 
 function press(num) {
@@ -135,27 +145,35 @@ function press(num) {
     }
 }
 
+// Lógica de borrado dígito por dígito
 function clearVal() {
     if (['ib', 'ik', 'pdc', 'w', 'v'].includes(activeField)) {
-        data[activeField] = '';
-        if (activeField === 'w' || activeField === 'v') {
-            document.getElementById(activeField + '-val').value = '';
-            calcIB();
-        } else {
-            document.getElementById('disp-' + activeField).innerText = '0';
-            calculate();
+        let currentVal = data[activeField].toString();
+        
+        if (currentVal.length > 0) {
+            // Elimina el último caracter
+            data[activeField] = currentVal.slice(0, -1);
+            
+            if (activeField === 'w' || activeField === 'v') {
+                document.getElementById(activeField + '-val').value = data[activeField];
+                calcIB();
+            } else {
+                // Si el campo queda vacío, muestra '0' por estética, pero conserva el valor vacío en memoria
+                document.getElementById('disp-' + activeField).innerText = data[activeField] === '' ? '0' : data[activeField];
+                calculate();
+            }
         }
     }
 }
 
 function resetAll() {
-    data = { ib: '', in: 0, iz: 0, i2: 0, ik: '', pdc: '', w: '', v: '220' };
+    data = { ib: '', in: 0, iz: 0, i2: 0, ik: '', pdc: '', w: '', v: currentPhase === 'tri' ? '380' : '220' };
     document.getElementById('disp-ib').innerText = '0';
     document.getElementById('disp-ik').innerText = '0';
     document.getElementById('disp-pdc').innerText = '0';
     document.getElementById('disp-i2').innerText = '0';
     document.getElementById('w-val').value = '';
-    document.getElementById('v-val').value = '220';
+    document.getElementById('v-val').value = data.v;
     document.getElementById('display-in').innerText = '--';
     document.getElementById('display-iz').innerText = '--';
     calculate();
