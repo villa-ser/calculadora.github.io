@@ -18,7 +18,7 @@
 
 body {
     margin: 0;
-    padding: 12px;
+    padding: 8px; /* Reducido para pantallas pequeñas */
     background-color: var(--dark-bg);
     min-height: 100vh;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -30,14 +30,14 @@ body {
     overscroll-behavior-y: none;
 }
 
-/* TARJETA CONTENEDORA GLASSMORPHISM */
+/* TARJETA CONTENEDORA COMPACTA */
 .gnc-card {
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 20px 16px;
+    border-radius: 12px;
+    padding: 12px 14px; /* Padding reducido */
     width: 100%;
     max-width: 420px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
@@ -45,18 +45,17 @@ body {
     flex-direction: column;
 }
 
-/* BOTÓN VOLVER */
 .back-btn {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--primary-neon);
     color: var(--primary-neon);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 0.8rem;
+    border-radius: 6px;
+    padding: 6px 12px; /* Reducido */
+    font-size: 0.75rem;
     font-weight: 700;
     cursor: pointer;
     align-self: flex-start;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: all 0.2s ease;
@@ -71,7 +70,7 @@ body {
 .gnc-title {
     font-family: 'Archivo Black', sans-serif;
     color: var(--primary-neon);
-    font-size: 1.5rem;
+    font-size: 1.25rem; /* Achicado para ganar espacio */
     margin: 0;
     text-transform: uppercase;
     text-align: center;
@@ -79,25 +78,24 @@ body {
 }
 
 .gnc-subtitle {
-    font-size: 0.72rem;
+    font-size: 0.65rem;
     color: rgba(255, 255, 255, 0.5);
     text-align: center;
-    margin: 4px 0 16px 0;
+    margin: 2px 0 10px 0; /* Margen inferior reducido */
     text-transform: uppercase;
 }
 
-/* TARJETAS DE RESULTADO / CONDICIONES */
 .results-top {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 16px;
+    gap: 4px; /* Brecha reducida drásticamente */
+    margin-bottom: 10px;
 }
 
 .condition-card {
     background: rgba(0, 0, 0, 0.3);
-    padding: 10px 14px;
-    border-radius: 8px;
+    padding: 6px 12px; /* Tarjetas más finas */
+    border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-left: 4px solid #444;
     display: flex;
@@ -120,29 +118,28 @@ body {
 
 .formula {
     font-family: 'Courier New', monospace;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
 }
 
 .status-icon {
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
-/* CONMUTADOR DE FASE */
 .phase-toggle {
     display: flex;
     background: var(--input-bg);
     border-radius: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 8px; /* Margen reducido */
     border: 1px solid var(--glass-border);
     overflow: hidden;
 }
 
 .phase-btn {
     flex: 1;
-    padding: 10px;
-    font-size: 0.72rem;
+    padding: 8px; /* Reducido */
+    font-size: 0.7rem;
     border: none;
     background: transparent;
     color: rgba(255, 255, 255, 0.5);
@@ -157,13 +154,12 @@ body {
     color: #000;
 }
 
-/* ASISTENTE DE POTENCIA */
 .power-calc {
     display: none;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 12px;
-    padding: 10px;
+    gap: 8px; /* Gap reducido */
+    margin-bottom: 8px;
+    padding: 8px;
     background: rgba(0, 212, 255, 0.05);
     border-radius: 8px;
     border: 1px dashed var(--primary-neon);
@@ -180,10 +176,10 @@ body {
 }
 
 .helper-box label {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     color: var(--primary-neon);
     font-weight: 700;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 
 .p-input {
@@ -193,8 +189,8 @@ body {
     color: white;
     width: 90%;
     text-align: center;
-    padding: 6px;
-    font-size: 0.9rem;
+    padding: 4px; /* Achicado verticalmente */
+    font-size: 0.85rem;
     outline: none;
     cursor: pointer;
 }
@@ -204,22 +200,21 @@ body {
     box-shadow: 0 0 6px var(--primary-neon);
 }
 
-/* FILAS Y ENTRADAS DE DATOS */
 .input-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 4px; /* Gap más pequeño */
+    margin-bottom: 6px;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
     background: var(--input-bg);
-    padding: 8px 4px;
+    padding: 6px 2px; /* Cajas de ingreso compactadas */
     border-radius: 8px;
     border: 1px solid var(--glass-border);
-    min-height: 60px;
+    min-height: 52px; /* Altura reducida */
     justify-content: space-between;
     text-align: center;
     cursor: pointer;
@@ -232,21 +227,21 @@ body {
 }
 
 label {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     text-transform: uppercase;
     color: var(--primary-neon);
     font-weight: 700;
 }
 
 .desc {
-    font-size: 0.52rem;
+    font-size: 0.48rem;
     color: rgba(255, 255, 255, 0.5);
     margin-bottom: 2px;
     text-transform: uppercase;
 }
 
 .display-value {
-    font-size: 1.05rem;
+    font-size: 0.95rem; /* Ajustado al nuevo tamaño de caja */
     font-weight: 700;
     color: white;
 }
@@ -255,7 +250,6 @@ label {
     color: var(--warning-amber);
 }
 
-/* MENÚ DESPLEGABLE PERSONALIZADO */
 .custom-select {
     position: relative;
     width: 100%;
@@ -269,7 +263,7 @@ label {
     background: transparent;
     border: none;
     color: white;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
     display: flex;
@@ -282,8 +276,8 @@ label {
 
 .select-selected::after {
     content: "";
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300d4ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-size: cover;
     transition: transform 0.3s ease;
@@ -305,7 +299,7 @@ label {
     border: 1px solid var(--glass-border);
     border-radius: 8px;
     margin-top: 5px;
-    max-height: 160px;
+    max-height: 140px;
     overflow-y: auto;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
     display: none;
@@ -324,9 +318,9 @@ label {
 
 .opt-item {
     color: rgba(255, 255, 255, 0.9);
-    padding: 10px;
+    padding: 8px;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -339,24 +333,28 @@ label {
     color: var(--primary-neon);
 }
 
-/* TECLADO NUMÉRICO */
+/* TECLADO NUMÉRICO ACHATADO */
 .numpad {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-top: 12px;
+    gap: 4px; /* Separación mínima */
+    margin-top: 6px;
 }
 
 .num-btn {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    border-radius: 6px;
     color: white;
-    padding: 14px;
-    font-size: 1.15rem;
+    padding: 0; /* Quitamos padding automático */
+    height: 42px; /* Botones obligatoriamente achatados */
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .num-btn:active {
@@ -367,7 +365,7 @@ label {
 
 .num-btn.action {
     background: rgba(255, 255, 255, 0.04);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .reset-btn {
@@ -375,12 +373,12 @@ label {
     background: rgba(255, 75, 43, 0.12);
     color: var(--error-neon);
     border: 1px solid var(--error-neon);
-    margin-top: 4px;
+    margin-top: 2px;
     font-weight: 700;
-    padding: 12px;
+    height: 38px; /* Altura específica para el botón inferior */
     text-transform: uppercase;
-    border-radius: 8px;
-    font-size: 0.8rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
     cursor: pointer;
 }
 
@@ -389,16 +387,17 @@ label {
     color: white;
 }
 
-/* FOOTER */
+/* FOOTER COMPRIMIDO */
 .info-footer {
-    margin-top: 18px;
-    padding-top: 12px;
+    margin-top: 8px;
+    padding-top: 8px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: rgba(255, 255, 255, 0.4);
-    line-height: 1.4;
+    line-height: 1.3;
 }
 
 .info-footer b {
     color: var(--primary-neon);
-}
+    }
+    
