@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#121212">
+    
+    <title>Máxima Cantidad de Cables - AEA 770</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="gnc-container">
+    <!-- BOTÓN VOLVER -->
+    <button class="back-btn" onclick="volverAlMenu()">← VOLVER AL MENÚ</button>
+
+    <h2 id="main-title">MÁXIMA CANTIDAD DE CABLES</h2>
+    
+    <div class="selector-row-full">
+        <div class="input-group">
+            <label>TIPO DE CANALIZACIÓN</label>
+            <div class="toggle-group">
+                <button class="toggle-btn active" id="btn-metalica" onclick="setCategory('metalica')">METÁLICA</button>
+                <button class="toggle-btn" id="btn-rigida" onclick="setCategory('rigida')">RÍGIDA</button>
+                <button class="toggle-btn" id="btn-corrugado" onclick="setCategory('corrugado')">CORRUGADO</button>
+            </div>
+            <div class="filter-group" id="sub-filters"></div>
+        </div>
+    </div>
+
+    <div class="abbreviation-legend" id="type-legend">
+        RS: acero semipesado | RL: acero liviano
+    </div>
+
+    <div class="selector-row">
+        <div class="input-group">
+            <label>SECCIÓN CABLE</label>
+            <div class="custom-select">
+                <div class="select-selected" id="cable-display" onclick="toggleDrop('cable-options')">2.50 mm²</div>
+                <div class="select-items" id="cable-options"></div>
+            </div>
+            <div class="extra-info" id="cable-info">Ø: 3.7mm | Sec: 10.7mm²</div>
+        </div>
+
+        <div class="input-group">
+            <label>DIÁMETRO CAÑO (mm)</label>
+            <div class="custom-select">
+                <div class="select-selected" id="pipe-display" onclick="toggleDrop('pipe-options')">19 mm</div>
+                <div class="select-items" id="pipe-options"></div>
+            </div>
+            <div class="extra-info" id="pipe-info">Sección Int: 227 mm²</div>
+        </div>
+    </div>
+
+    <div class="display-result">
+        <span class="res-label" id="res-desc">Cables Permitidos (PE incluido)</span>
+        <div class="res-value" id="res-val">4+PE</div>
+    </div>
+
+    <div class="table-title" id="table-name">TABLA 770.10.VII - CANALIZACIÓN METÁLICA</div>
+    <div class="table-wrapper">
+        <table id="full-table">
+            <thead>
+                <tr id="table-headers">
+                    <th>Caño</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
+
+    <div class="footer" id="footer-text">
+        Cálculos basados en conductores IRAM-NM 247-3. La cantidad incluye el conductor de protección (PE). Los valores "-" indican combinaciones no permitidas.
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
