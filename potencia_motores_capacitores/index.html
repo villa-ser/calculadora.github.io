@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#121212">
+    
+    <title>Potencias y Motores - Villaser Gestión</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="gnc-container">
+    <!-- BOTÓN VOLVER (Agregado para mantener consistencia con la App) -->
+    <button class="back-btn" onclick="volverAlMenu()">← VOLVER AL MENÚ</button>
+
+    <h2>Calc. Potencias y Motores</h2>
+
+    <div class="results-top">
+        <span class="res-label" id="res-label">RESULTADO</span>
+        <span class="res-val" id="main-result">0.00</span>
+    </div>
+
+    <div class="category-grid">
+        <label class="check-card active" id="card-mono">
+            <input type="radio" name="cat" value="mono" checked onclick="updateCat('mono')">
+            <span>Monofásico</span>
+        </label>
+        <label class="check-card" id="card-tri">
+            <input type="radio" name="cat" value="tri" onclick="updateCat('tri')">
+            <span>Trifásico</span>
+        </label>
+        <label class="check-card" id="card-mot">
+            <input type="radio" name="cat" value="mot" onclick="updateCat('mot')">
+            <span>Motor</span>
+        </label>
+        <label class="check-card" id="card-cap">
+            <input type="radio" name="cat" value="cap" onclick="updateCat('cap')">
+            <span>Capacitores</span>
+        </label>
+    </div>
+
+    <div id="sub-selectors" class="sub-category-grid"></div>
+
+    <div class="input-row" id="input-area"></div>
+
+    <div class="numpad">
+        <button class="num-btn" onclick="press(7)">7</button>
+        <button class="num-btn" onclick="press(8)">8</button>
+        <button class="num-btn" onclick="press(9)">9</button>
+        <button class="num-btn" onclick="press(4)">4</button>
+        <button class="num-btn" onclick="press(5)">5</button>
+        <button class="num-btn" onclick="press(6)">6</button>
+        <button class="num-btn" onclick="press(1)">1</button>
+        <button class="num-btn" onclick="press(2)">2</button>
+        <button class="num-btn" onclick="press(3)">3</button>
+        <button class="num-btn action" onclick="press('.')">.</button>
+        <button class="num-btn" onclick="press(0)">0</button>
+        <button class="num-btn action" onclick="del()">DEL</button>
+        <button class="num-btn reset-btn" onclick="resetAll()">Reiniciar Sistema</button>
+    </div>
+
+    <div class="formula-desc" id="formula-info"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
