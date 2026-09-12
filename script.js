@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'btnDiagnosticodeCapacitores': './diagnostico_de_capacitores/index.html', 
         'btnCorrientedeCCMinima': './corriente_de_cc_minima/index.html', 
         'btnReducciondeCCmaxima': './reduccion_de_cc_maxima/index.html', 
-        'btnMaximaCantidadCables': './maxima_cantida_de_cables_en_caneria/index.html', 
+        'btnMaximaCantidadCables': './maxima_cantidad_cables/index.html', 
         'btnNuevoModulo': './nuevo_modulo/index.html'
     };
 
