@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#121212">
+    
+    <title>Balance Térmico - Villaser Gestión</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="gnc-container">
+    <!-- BOTÓN VOLVER -->
+    <button class="back-btn" onclick="volverAlMenu()">← VOLVER AL MENÚ</button>
+
+    <h2>Balance Térmico AEA 770</h2>
+
+    <div class="results-top">
+        <div class="res-item">
+            <span class="res-label">Potencia Total (P_tot)</span>
+            <span class="res-val pct-drop"><span id="res-ptot">0.0</span> <span style="font-size: 0.8rem;">W</span></span>
+        </div>
+        <div class="res-item">
+            <span class="res-label">Sugerencia</span>
+            <span class="res-val v-final" id="rec-box">Gabinete: > 0 W</span>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <div class="check-card active" id="phase-mono" onclick="setPhase('mono')"><span>Monofásico</span></div>
+        <div class="check-card" id="phase-tri" onclick="setPhase('tri')"><span>Trifásico</span></div>
+    </div>
+
+    <div class="input-row">
+        <div class="input-group active" id="in-val" onclick="setFocus('val')">
+            <label>Amperes (A)</label>
+            <div id="v-val" class="display-value">0</div>
+        </div>
+        <div class="input-group" id="in-aux" onclick="setFocus('aux')">
+            <label>Auxiliar (W)</label>
+            <div id="v-aux" class="display-value">0</div>
+        </div>
+    </div>
+
+    <div class="circuits-list" id="circ-list">
+        <div style="text-align:center; padding:15px; font-size:0.8rem; color:rgba(255,255,255,0.4);">Tablero vacío</div>
+    </div>
+
+    <div class="numpad">
+        <button type="button" class="num-btn" onclick="press('7')">7</button>
+        <button type="button" class="num-btn" onclick="press('8')">8</button>
+        <button type="button" class="num-btn" onclick="press('9')">9</button>
+        <button type="button" class="num-btn" onclick="press('4')">4</button>
+        <button type="button" class="num-btn" onclick="press('5')">5</button>
+        <button type="button" class="num-btn" onclick="press('6')">6</button>
+        <button type="button" class="num-btn" onclick="press('1')">1</button>
+        <button type="button" class="num-btn" onclick="press('2')">2</button>
+        <button type="button" class="num-btn" onclick="press('3')">3</button>
+        <button type="button" class="num-btn action" onclick="press('.')">.</button>
+        <button type="button" class="num-btn" onclick="press('0')">0</button>
+        <button type="button" class="num-btn action" onclick="del()">DEL</button>
+        
+        <div class="btn-add-row">
+            <button type="button" class="add-btn btn-cab" onclick="addItem('CAB')">+ Añadir Cabecera</button>
+            <button type="button" class="add-btn btn-pia" onclick="addItem('PIA')">+ Añadir Salida</button>
+        </div>
+        
+        <button type="button" class="num-btn reset-btn" onclick="resetAll()">REINICIAR TABLERO</button>
+    </div>
+
+    <div class="info-footer">
+        <b>Desglose del Cálculo</b>
+        <div class="formula-box" id="math-breakdown">
+            Agregue dispositivos para calcular...
+        </div>
+    </div>
+
+    <div class="info-footer" style="margin-top: 4px;">
+        <b>Ref. Auxiliares (P_au)</b>
+        <table class="ref-table">
+            <thead><tr><th>Equipo</th><th>W</th><th>Equipo</th><th>W</th></tr></thead>
+            <tbody>
+                <tr><td>Ojo Buey</td><td>1.0</td><td>Contactor</td><td>4.0</td></tr>
+                <tr><td>Timbre</td><td>6.0</td><td>Smart Mod.</td><td>1.5</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
