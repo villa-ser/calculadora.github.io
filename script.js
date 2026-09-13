@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'btnInecuaciones': './inecuaciones/index.html',
         'btnCaidadeTension': './caida_de_tension/index.html',
         'btnIntensidadadmisible': './intensidad_admisible/index.html',
-        'btnPotenciaMotoresCapacitores': './potencia_motores_apacitores/index.html',
+        'btnPotenciaMotoresCapacitores': './potencia_motores_capacitores/index.html',
         'btnVerificacionCortocircuito': './verificacion_intensidad_de_cortocircuito/index.html', 
         'btnBalancetermicoenTableros': './balance_termico_en_tableros/index.html', 
         'btnCurvatermica': './curva_termica/index.html', 
