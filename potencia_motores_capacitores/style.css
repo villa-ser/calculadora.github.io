@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Segoe+UI:wght@400;600;700&display=swap');
+
+:root {
+    --primary-neon: #00d4ff;
+    --success-green: #28a745;
+    --warning-amber: #ffcc00;
+    --error-red: #ff4b2b;
+    --bg-glass: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --input-bg: rgba(0, 0, 0, 0.4);
+    --dark-bg: #121212;
+    --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-title: 'Archivo Black', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--dark-bg);
+    margin: 0;
+    padding: 6px; /* Padding ultra reducido para evitar scroll */
+    font-family: var(--font-main);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+}
+
+.gnc-container {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 10px 12px; /* Reducción extrema de padding interno */
+    box-sizing: border-box;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+/* BOTÓN VOLVER */
+.back-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--primary-neon);
+    color: var(--primary-neon);
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+
+.back-btn:active {
+    background: var(--primary-neon);
+    color: #000;
+    transform: scale(0.96);
+}
+
+h2 {
+    color: var(--primary-neon);
+    font-family: var(--font-title);
+    text-transform: uppercase;
+    font-size: 1.15rem; /* Achicado */
+    letter-spacing: -0.5px;
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
+/* RESULTADO PRINCIPAL */
+.results-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px; /* Margen reducido */
+    background: rgba(0,0,0,0.3);
+    padding: 10px 5px; /* Padding reducido */
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    width: 100%;
+}
+
+.res-label { font-size: 0.6rem; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-bottom: 2px; font-weight: bold;}
+.res-val { font-size: 2.2rem; font-weight: bold; color: var(--success-green); line-height: 1; text-shadow: 0 0 10px rgba(40, 167, 69, 0.4); }
+
+/* --- BOTONES SELECTORES ESTILO NGC --- */
+.category-grid, .sub-category-grid {
+    display: flex;
+    background: var(--input-bg);
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.check-card {
+    flex: 1;
+    margin: 0;
+    cursor: pointer;
+    text-align: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    min-width: 0;
+}
+
+.check-card input { display: none; }
+        
+.check-card span {
+    display: block;
+    padding: 8px 1px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgba(255,255,255,0.4);
+    background: transparent;
+    transition: 0.3s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.check-card.active span, .check-card input:checked + span {
+    background: var(--primary-neon);
+    color: black;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+}
+
+/* CAJAS DE ENTRADA */
+.input-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Ajustado a 4 para encajar variables sin desbordar */
+    gap: 4px; /* Gap más pequeño */
+    margin-bottom: 6px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    background: var(--input-bg);
+    padding: 6px 2px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    min-height: 52px; /* Altura reducida */
+    justify-content: space-between;
+    text-align: center;
+    transition: 0.2s ease;
+}
+
+.input-group.active {
+    border-color: var(--primary-neon);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+}
+        
+.input-group label { font-size: 0.55rem; color: var(--primary-neon); text-transform: uppercase; display: block; margin-bottom: 2px; font-weight: bold;}
+.display-value { font-size: 0.95rem; font-weight: bold; color: white; }
+
+/* TECLADO NUMÉRICO ACHATADO */
+.numpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px; /* Separación mínima */
+    margin-top: 6px;
+}
+        
+.num-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    color: white;
+    padding: 0; /* Quitamos padding automático */
+    height: 42px; /* Botones obligatoriamente achatados */
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+        
+.num-btn:active { background: var(--primary-neon); color: black; transform: scale(0.96); }
+.num-btn.action { background: rgba(255, 255, 255, 0.04); font-size: 0.8rem; font-weight: 700; color: white;}
+        
+.reset-btn { 
+    grid-column: span 3; 
+    background: rgba(255, 75, 43, 0.12); 
+    color: var(--error-red); 
+    border: 1px solid var(--error-red); 
+    margin-top: 2px; 
+    font-weight: 700; 
+    height: 38px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.reset-btn:active { background: var(--error-red); color: white; }
+
+/* DESCRIPCIÓN Y FÓRMULA COMPRIMIDA */
+.formula-desc {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.3;
+    text-align: justify;
+}
+
+.formula-desc b { color: var(--primary-neon); display: inline; text-transform: none; font-size: 0.55rem;}
+
+.formula-large {
+    font-family: 'Courier New', monospace; 
+    background: rgba(0,0,0,0.3); 
+    padding: 6px; 
+    border-radius: 6px; 
+    display: block; 
+    margin: 6px 0; 
+    color: white; 
+    text-align: center; 
+    font-size: 0.75rem;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.formula-note { font-size: 0.55rem; color: rgba(255,255,255,0.4); font-style: normal; }
