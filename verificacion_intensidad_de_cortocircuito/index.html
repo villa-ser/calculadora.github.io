@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#121212">
+    
+    <title>Verificación I²t - Villaser Gestión</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="gnc-container">
+    <!-- BOTÓN VOLVER -->
+    <button class="back-btn" onclick="volverAlMenu()">← VOLVER AL MENÚ</button>
+
+    <h2>Verificación I²t - AEA 770</h2>
+
+    <div class="results-top">
+        <div class="formula-container-top">
+            <div class="formula-side">
+                <span class="theory-label">(k · S)²</span>
+                <span id="res-ks" class="calc-value">0</span>
+            </div>
+            <span class="op-symbol" id="res-op">≥</span>
+            <div class="formula-side">
+                <span class="theory-label">I² · t</span>
+                <span id="res-it" class="calc-value">0</span>
+            </div>
+        </div>
+
+        <span class="res-label">Estado de Protección</span>
+        <span class="res-val" id="main-result">CUMPLE</span>
+        <div id="rec-text" class="status-msg">SISTEMA PROTEGIDO</div>
+    </div>
+
+    <span class="section-tag">1. Datos del Cable y Protección</span>
+    <div class="btn-group">
+        <div class="check-card active" id="k-115" onclick="setK(115, 'k-115')"><span>Cu / PVC</span><small>k=115</small></div>
+        <div class="check-card" id="k-143" onclick="setK(143, 'k-143')"><span>Cu / XLPE</span><small>k=143</small></div>
+        <div class="check-card" id="k-76" onclick="setK(76, 'k-76')"><span>Al / PVC</span><small>k=76</small></div>
+    </div>
+
+    <div class="btn-group">
+        <div class="check-card active" id="t-01" onclick="setT(0.01, 't-01')"><span>Curva B</span><small>0.01s</small></div>
+        <div class="check-card" id="t-02" onclick="setT(0.02, 't-02')"><span>Curva C</span><small>0.02s</small></div>
+        <div class="check-card" id="t-05" onclick="setT(0.05, 't-05')"><span>Curva D</span><small>0.05s</small></div>
+    </div>
+
+    <span class="section-tag">2. Estimación de Icc Origen (AEA)</span>
+    <div class="btn-group">
+        <div class="check-card" id="aea-3000" onclick="setAEA(3000, 'aea-3000')"><span>3 kA</span><small>Rural</small></div>
+        <div class="check-card active" id="aea-4500" onclick="setAEA(4500, 'aea-4500')"><span>4.5 kA</span><small>Urbano</small></div>
+        <div class="check-card" id="aea-6000" onclick="setAEA(6000, 'aea-6000')"><span>6 kA</span><small>Industrial</small></div>
+    </div>
+
+    <div class="input-row">
+        <div class="input-group" id="in-IccT" onclick="setFocus('IccT')">
+            <label>Icc Trafo (A)</label>
+            <div id="v-IccT" class="display-value">20000</div>
+        </div>
+        <div class="input-group" id="in-LT" onclick="setFocus('LT')">
+            <label>Dist. Trafo (m)</label>
+            <div id="v-LT" class="display-value">150</div>
+        </div>
+        <div class="input-group active" id="in-Icc" onclick="setFocus('Icc')">
+            <label>Icc Origen (A)</label>
+            <div id="v-Icc" class="display-value">4500</div>
+        </div>
+    </div>
+
+    <span class="section-tag">3. Punto de Falla (Tablero)</span>
+    <div class="input-row">
+        <div class="input-group" id="in-S" onclick="setFocus('S')">
+            <label>Sección mm²</label>
+            <div id="v-S" class="display-value">2.5</div>
+        </div>
+        <div class="input-group" id="in-L" onclick="setFocus('L')">
+            <label>Dist. Falla (m)</label>
+            <div id="v-L" class="display-value">15</div>
+        </div>
+        <div class="input-group" style="border-color: rgba(255, 204, 0, 0.2); cursor: default;">
+            <label>Icc Local</label>
+            <div id="v-IccL" class="display-value" style="color:var(--warning-amber)">0</div>
+        </div>
+    </div>
+
+    <div class="numpad">
+        <button class="num-btn" onclick="press(7)">7</button>
+        <button class="num-btn" onclick="press(8)">8</button>
+        <button class="num-btn" onclick="press(9)">9</button>
+        <button class="num-btn" onclick="press(4)">4</button>
+        <button class="num-btn" onclick="press(5)">5</button>
+        <button class="num-btn" onclick="press(6)">6</button>
+        <button class="num-btn" onclick="press(1)">1</button>
+        <button class="num-btn" onclick="press(2)">2</button>
+        <button class="num-btn" onclick="press(3)">3</button>
+        <button class="num-btn action" onclick="press('.')">.</button>
+        <button class="num-btn" onclick="press(0)">0</button>
+        <button class="num-btn action" onclick="del()">DEL</button>
+        <button class="num-btn reset-btn" onclick="resetAll()">REINICIAR SISTEMA</button>
+    </div>
+
+    <div class="info-footer">
+        <b>Verificación normativa según AEA 770</b><br>
+        Estimación de Icc basada en impedancia de red (35mm² Al).
+        <div class="formula-box">Verifica que (k·S)² ≥ I²·t</div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
